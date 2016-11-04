@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.bit2016.mysite.repository.GuestbookDao;
+import com.bit2016.mysite.service.GuestbookService;
 import com.bit2016.mysite.vo.GuestbookVo;
 
 @Controller
@@ -18,11 +18,11 @@ import com.bit2016.mysite.vo.GuestbookVo;
 public class GuestbookController {
 	
 	@Autowired
-	private GuestbookDao guestbookDao;
+	private GuestbookService guestbookService;
 	
 	@RequestMapping( "" )
 	public String index( Model model ){
-		List<GuestbookVo> list = guestbookDao.getList();
+		List<GuestbookVo> list = guestbookService.getMessageList();
 		model.addAttribute( "list", list );
 		return "guestbook/index";
 	}
@@ -35,13 +35,13 @@ public class GuestbookController {
 	
 	@RequestMapping( value="/delete", method=RequestMethod.POST )
 	public String delete( @ModelAttribute GuestbookVo vo ){
-		guestbookDao.delete( vo );
+		guestbookService.deleteMessage( vo );
 		return "redirect:/guestbook";
 	}
 	
 	@RequestMapping( value="/add", method=RequestMethod.POST )
 	public String add( @ModelAttribute GuestbookVo vo ) {
-		guestbookDao.insert(vo);
+		guestbookService.writeMessage(vo);
 		return "redirect:/guestbook";
 	}
 }
