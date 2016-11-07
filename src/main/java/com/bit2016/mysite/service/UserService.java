@@ -2,7 +2,6 @@ package com.bit2016.mysite.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.bit2016.mysite.repository.UserDao;
 import com.bit2016.mysite.vo.UserVo;
 
@@ -17,7 +16,8 @@ public class UserService {
 	}
 	
 	public UserVo login( String email, String password ) {
-		UserVo userVo = userDao.get(email, password);
+		UserVo userVo = null;
+		userVo = userDao.get(email, password);
 		return userVo;
 	}
 	
