@@ -23,7 +23,7 @@
 					<c:when test="${param.menu == 'guestbook-ajax' }">
 						<li><a href="${pageContext.request.contextPath }">안대혁</a></li>
 						<li><a href="${pageContext.request.contextPath }/guestbook">방명록</a></li>
-						<li class="selected"><a href="${pageContext.request.contextPath }/guestbook?a=ajax">방명록(AJAX)</a></li>
+						<li class="selected"><a href="${pageContext.request.contextPath }/guestbook/ajax">방명록(AJAX)</a></li>
 						<li><a href="${pageContext.request.contextPath }/board">게시판</a></li>
 					</c:when>
 

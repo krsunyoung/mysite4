@@ -17,11 +17,17 @@ public class GuestbookDao {
 		sqlSession.delete( "guestbook.delete", vo );
 	}
 	
-	public void insert(GuestbookVo vo ) {
+	public Long insert(GuestbookVo vo ) {
 		sqlSession.insert( "guestbook.insert", vo );
+		return vo.getNo();
 	}
 	
 	public List<GuestbookVo> getList() {
 		return sqlSession.selectList( "guestbook.getList" );
 	}
+	
+	public List<GuestbookVo> getList( int page ) {
+		return sqlSession.selectList( "guestbook.getListByPage", page );
+	}
+	
 }

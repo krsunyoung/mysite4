@@ -17,12 +17,23 @@ public class GuestbookService {
 	public List<GuestbookVo> getMessageList() {
 		return guestbookDao.getList();
 	}
+
+	public List<GuestbookVo> getMessageList( int page ) {
+		return guestbookDao.getList( page );
+	}
 	
 	public void deleteMessage( GuestbookVo vo ){
 		guestbookDao.delete( vo );
 	}
 	
 	public void writeMessage( GuestbookVo vo ) {
-		guestbookDao.insert(vo);
+		Long no = guestbookDao.insert(vo);
+		System.out.println( no );
 	}
+	
+	public GuestbookVo writeMessage2( GuestbookVo vo ) {
+		Long no = guestbookDao.insert(vo);
+		System.out.println( no );
+		return null;
+	}	
 }
