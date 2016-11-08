@@ -42,9 +42,9 @@ public class UserController {
 	
 	@RequestMapping( "/login" )
 	public String login(
+		HttpSession session, 
 		@RequestParam( value="email", required=true, defaultValue="" ) String email,
-		@RequestParam( value="password", required=true, defaultValue="" ) String password,
-		HttpSession session ){
+		@RequestParam( value="password", required=true, defaultValue="" ) String password ){
 		
 		UserVo userVo = userService.login(email, password);
 		if( userVo == null ) {
@@ -59,21 +59,20 @@ public class UserController {
 	
 	@RequestMapping( "/logout" )
 	public String logout( HttpSession session ) {
-		
 		session.removeAttribute( "authUser" );
 		session.invalidate();
-		
 		return "redirect:/";
 	}
 	
 	@RequestMapping( "/modifyform" )
 	public String modifyForm( HttpSession session, Model model ) {
+		// 권한 체크(접근제한)
+		/////////////////////////////////////
 		UserVo authUser = (UserVo)session.getAttribute( "authUser" );
-		
-		//접근제한
 		if( authUser == null ) {
 			return "redirect:/user/loginform";
 		}
+		/////////////////////////////////////
 		
 		UserVo vo = userService.getUser( authUser.getNo() );
 		model.addAttribute( "userVo", vo );
@@ -82,11 +81,13 @@ public class UserController {
 	
 	@RequestMapping( "/modify" )
 	public String modify( HttpSession session, @ModelAttribute UserVo vo ){
+		// 권한 체크(접근제한)
+		/////////////////////////////////////
 		UserVo authUser = (UserVo)session.getAttribute( "authUser" );
-		//접근 제한
 		if( authUser == null ) {
 			return "redirect:/user/loginform";
 		}
+		/////////////////////////////////////
 		
 		vo.setNo( authUser.getNo() );
 		userService.updateUser(vo);
@@ -94,11 +95,4 @@ public class UserController {
 		
 		return "redirect:/user/modifyform?update=success";
 	}
-	
-//	@ExceptionHandler( UserDaoException.class )
-//	public String handlerUserDaoException(){
-//		// 1. logging ( 파일에 내용 저장 )
-//		// 2. 사용자에게 안내(error) 페이지
-//		return "error/500";
-//	}
 }
