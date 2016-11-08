@@ -22,18 +22,19 @@ public class GuestbookService {
 		return guestbookDao.getList( page );
 	}
 	
-	public void deleteMessage( GuestbookVo vo ){
-		guestbookDao.delete( vo );
+	public boolean deleteMessage( GuestbookVo vo ){
+		int count = guestbookDao.delete( vo );
+		return count == 1;
 	}
 	
-	public void writeMessage( GuestbookVo vo ) {
+	public GuestbookVo writeMessage( GuestbookVo vo, boolean fetch ) {
+		GuestbookVo guestbookVo = null;
+		
 		Long no = guestbookDao.insert(vo);
-		System.out.println( no );
+		if( fetch ) {
+			guestbookVo = guestbookDao.get( no );
+		}
+		
+		return guestbookVo;
 	}
-	
-	public GuestbookVo writeMessage2( GuestbookVo vo ) {
-		Long no = guestbookDao.insert(vo);
-		System.out.println( no );
-		return null;
-	}	
 }

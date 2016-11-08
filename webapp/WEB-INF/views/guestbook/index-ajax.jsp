@@ -117,7 +117,7 @@ $(function(){
 
 				// 삭제 요청
 				$.ajax({
-					url: "${pageContext.request.contextPath }/api/guestbook?a=ajax-delete&no=" + no + "&password=" + password,
+					url: "${pageContext.request.contextPath }/guestbook/api/delete?no=" + no + "&password=" + password,
 					type: "get",
 					dataType: "json",
 					data: "",
@@ -191,11 +191,10 @@ $(function(){
 		}
 		
 		$.ajax({
-			url: "${pageContext.request.contextPath }/api/guestbook",
+			url: "${pageContext.request.contextPath }/guestbook/api/add",
 			type: "post",
 			dataType: "json",
-			data: "a=ajax-add" +
-				  "&name=" + name + 
+			data: "name=" + name + 
 				  "&password=" + password + 
 				  "&content=" + content,
 			success: function( response ) { 
