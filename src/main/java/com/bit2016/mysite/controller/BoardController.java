@@ -70,7 +70,7 @@ public class BoardController {
 		return "board/modify";
 	}
 
-
+	@Auth
 	@RequestMapping( value="/reply", method=RequestMethod.GET )
 	public String reply(
 		@RequestParam( value="no", required=true, defaultValue="0") Long no,
