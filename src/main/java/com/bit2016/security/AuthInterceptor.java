@@ -47,5 +47,4 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		//4. 인증된 사용자
 		return true;
 	}
-
 }
