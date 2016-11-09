@@ -2,8 +2,6 @@ package com.bit2016.mysite.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,19 +104,13 @@ public class BoardController {
 			"&kwd=" + WebUtil.encodeURL( keyword, "UTF-8");
 	}
 	
+	@Auth
 	@RequestMapping( "/delete" )
 	public String delete(
-		HttpSession session,	
+		@AuthUser UserVo authUser,
 		@ModelAttribute BoardVo vo,
 		@RequestParam( value="p", required=true, defaultValue="1") Integer page,
 		@RequestParam( value="kwd", required=true, defaultValue="") String keyword ){
-		// 권한 체크
-		/////////////////////////////////////
-		UserVo authUser = (UserVo)session.getAttribute( "authUser" );
-		if( authUser == null ){
-			return "redirect:/user/loginform";
-		}
-		/////////////////////////////////////
 		
 		vo.setUserNo( authUser.getNo() );
 		boardService.deleteMessage( vo );
@@ -135,20 +127,14 @@ public class BoardController {
 		return "board/write";
 	}
 	
+	@Auth
 	@RequestMapping( value="/write", method=RequestMethod.POST )
 	public String write(
-		HttpSession session, 
+		@AuthUser UserVo authUser, 
 		@ModelAttribute BoardVo vo,
 		@RequestParam( value="p", required=true, defaultValue="1") Integer page,
 		@RequestParam( value="kwd", required=true, defaultValue="") String keyword ){
-		// 권한 체크
-		/////////////////////////////////////
-		UserVo authUser = (UserVo)session.getAttribute( "authUser" );
-		if( authUser == null ){
-			return "redirect:/user/loginform";
-		}
-		/////////////////////////////////////
-			
+
 		vo.setUserNo( authUser.getNo() );
 		boardService.writeMessage( vo );
 		
