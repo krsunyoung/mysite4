@@ -14,6 +14,10 @@ public class GalleryDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public int delete( GalleryVo galleryVo ){
+		return sqlSession.delete( "gallery.delete", galleryVo );
+	}
+	
 	public List<GalleryVo> getList() {
 		return sqlSession.selectList( "gallery.getList" );
 	}

@@ -6,7 +6,7 @@ public class GalleryVo {
 	private String saveFileName;
 	private String comments;
 	private String fileExtName;
-	private Integer fileSize;
+	private Long fileSize;
 	private String regDate;
 	private Long userNo;
 	private String userName;
@@ -40,10 +40,10 @@ public class GalleryVo {
 	public void setFileExtName(String fileExtName) {
 		this.fileExtName = fileExtName;
 	}
-	public Integer getFileSize() {
+	public Long getFileSize() {
 		return fileSize;
 	}
-	public void setFileSize(Integer fileSize) {
+	public void setFileSize(Long fileSize) {
 		this.fileSize = fileSize;
 	}
 	public String getRegDate() {
