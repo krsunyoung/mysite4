@@ -23,8 +23,7 @@ public class UserController {
 		@RequestParam( value="email", required=true, defaultValue="" ) String email
 		){
 		
-		SingletonClass sc = SingletonClass.getInstance();
-		
+		//SingletonClass sc = SingletonClass.getInstance();
 		boolean result = userService.emailExists(email);
 		return JSONResult.success( result ? "exist" : "not exist" );
 	}

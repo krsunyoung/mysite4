@@ -7,23 +7,19 @@ public class JSONResult {
 	private Object data;    // result가 "succes" 일 때  전달해야 할 데이터 객체
 
 	public static JSONResult error( String message ) {
-		return new JSONResult( false, message );
+		return new JSONResult( false, null, message );
 	}
 	
 	public static JSONResult success( Object data ) {
-		return new JSONResult( data );
+		return new JSONResult( true, data, null );
 	}
 	
 	private JSONResult() {
 	}
-	
-	private JSONResult( Object data ) {
-		result = "success";
-		this.data = data;
-	}
 
-	private JSONResult( boolean isSuccess, String message ) {
+	private JSONResult( boolean isSuccess, Object data, String message ) {
 		result = isSuccess ? "success" : "fail";
+		this.data = data;
 		this.message = message;
 	}
 
