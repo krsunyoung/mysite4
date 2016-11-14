@@ -25,7 +25,7 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping( "/joinform" )
-	public String joinForm(){
+	public String joinForm( @ModelAttribute UserVo userVo ){
 		return "user/joinform";
 	}
 	
@@ -36,18 +36,18 @@ public class UserController {
 	
 	@RequestMapping( "/join" )
 	public String join( 
-		@ModelAttribute @Valid UserVo vo,
+		@ModelAttribute @Valid UserVo userVo,
 		BindingResult result){
 		
 		if( result.hasErrors() ) {
-			List<ObjectError> list = result.getAllErrors();
-			for( ObjectError o : list ) {
-				System.out.println( "Object Error:" + o );
-			}
+//			List<ObjectError> list = result.getAllErrors();
+//			for( ObjectError o : list ) {
+//				System.out.println( "Object Error:" + o );
+//			}
 			return "user/joinform"; 
 		}
 		
-		userService.join( vo );
+		userService.join( userVo );
 		return "redirect:/user/joinsuccess";
 	}
 	

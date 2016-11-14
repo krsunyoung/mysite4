@@ -15,8 +15,13 @@ public class UserVo {
 	
 	@NotEmpty
 	@Email
+//	@Pattern(regexp="^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$")
+//	@Password
+//  @Jumin
+//  @Phone	
 	private String email;
-
+	
+	
 	@NotEmpty
 	@Pattern(regexp="^[0-9]+$")
 	private String password;
