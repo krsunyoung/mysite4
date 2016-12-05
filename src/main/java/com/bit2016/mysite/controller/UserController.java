@@ -70,7 +70,6 @@ public class UserController {
 		vo.setNo( authUser.getNo() );
 		userService.updateUser(vo);
 		authUser.setName( vo.getName() );
-		
 		return "redirect:/user/modifyform?update=success";
 	}
 }
